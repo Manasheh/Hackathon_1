@@ -22,7 +22,6 @@ try:
         print("Logic to find volunteer goes here")
 
     elif choice == '2':
-        # Logic to find organisation looking for volunteers based on multiple criteria
         print('''               
                   1) Jerusalem 2) Tel aviv 3) Haifa 4) Rishon LeZion 5) Petakh Tikva \n
                   6) Ashdod 7) Netanya 8) Beer Sheva 9) Holon 10) Bnei Brak \n
