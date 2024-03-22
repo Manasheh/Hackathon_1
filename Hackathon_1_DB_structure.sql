@@ -36,10 +36,10 @@
 -- 	type_id INT REFERENCES type_opp(type_id),
 -- 	subtype_id INT REFERENCES subtype_opp(subtype_id));
 	
--- CREATE TABLE opportunites(
+-- CREATE TABLE opportunities(
 -- 	opp_id SERIAL PRIMARY KEY,
--- 	opp_name VARCHAR(25) NOT NULL,
--- 	opp_email VARCHAR(25) UNIQUE,
+-- 	opp_name VARCHAR(70) NOT NULL,
+-- 	opp_email VARCHAR(70) UNIQUE,
 -- 	opp_description VARCHAR(150),
 -- 	region_id INT REFERENCES region(region_id),
 -- 	shift_id INT REFERENCES work_shift(shift_id),
@@ -236,7 +236,7 @@
 -- ('Emily', 'Cohen', 'emilycohen@example.com', '0577789012', 39, 3, 5, 6, 9, 39),
 -- ('Alexander', 'Friedman', 'alexanderfriedman@example.com', '0599901234', 40, 4, 6, 7, 10, 40);
 
--- INSERT INTO opportunites (opp_name, opp_email,opp_description, region_id, shift_id, day_id, frequency_id, type_id, subtype_id )
+-- INSERT INTO opportunities (opp_name, opp_email,opp_description, region_id, shift_id, day_id, frequency_id, type_id, subtype_id )
 -- VALUES
 
 -- ('Animal Shelter Volunteer', 'animalshelter@example.com','Help care for animals in need of homes',
