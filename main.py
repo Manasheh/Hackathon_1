@@ -170,6 +170,7 @@ try:
         if organizations:
             print("Organizations matching the criteria:")
             for org in organizations:
+                # print(org)
                 print(f"Organization name: {org[1]}")
                 print(f"Organization email address: {org[2]}")
                 print(f"Opportunity Description: {org[3]}")
