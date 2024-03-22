@@ -1,27 +1,46 @@
 import psycopg2
 import config
 
-print('1 to find volunteer')
+class Link_Database:
+    def __init__(self):
+        self.conn = psycopg2.connect(
+            dbname=config.DATABASE,
+            user=config.USERNAME,
+            password=config.PASSWORD,
+            host=config.HOSTNAME,
+            port=config.PORT
+        )
+        self.cursor = self.conn.cursor()
+
+    def find_organizations(self, region_id, shift_id, day_id, frequency_id, type_id, subtype_id):
+        query = '''
+            SELECT *
+            FROM opportunities
+            WHERE region_id = %s
+            AND shift_id = %s
+            AND day_id = %s
+            AND frequency_id = %s
+            AND type_id = %s
+            AND subtype_id = %s;
+        '''
+        self.cursor.execute(query, (region_id, shift_id, day_id, frequency_id, type_id, subtype_id))
+        organizations = self.cursor.fetchall()
+        return organizations
+
+    
+
+print('1 to find organisation')
 print('2 to find organisation')
 
 choice = input('Enter your choice: ')
 
 try:
-    conn = psycopg2.connect(
-        dbname=config.DATABASE,
-        user=config.USERNAME,
-        password=config.PASSWORD,
-        host=config.HOSTNAME,
-        port=config.PORT
-    )
-
-    cursor = conn.cursor()
-
     if choice == '1':
-        # Logic to find volunteer
-        print("Logic to find volunteer goes here")
-
+        print('logic for finding volunteers here')
+    
     elif choice == '2':
+        # organization_finder = Link_Database()
+
         print('''               
                   1) Jerusalem 2) Tel aviv 3) Haifa 4) Rishon LeZion 5) Petakh Tikva \n
                   6) Ashdod 7) Netanya 8) Beer Sheva 9) Holon 10) Bnei Brak \n
@@ -43,22 +62,22 @@ try:
                     break
             except ValueError:
                 print('Invalid input.')
+
         print('''\n
                     1) Morning Shift
                     2) Afternoon Shift
-                    3)Evening Shift
-                    4)Full-day
+                    3) Evening Shift
+                    4) Full-day
                     ''')
         while True:
             try:
                 shift_id = int(input("Enter shift id: "))
                 if shift_id < 1 or shift_id > 4:
-                    print('Invalid entry, shift id should be between 1 and 4 and')
+                    print('Invalid entry, shift id should be between 1 and 4')
                 else:
                     break
             except ValueError:
                 print('Invalid input')
-
 
         print('''
                 1) Sunday 2) Monday 3) Tuesday
@@ -145,37 +164,18 @@ try:
                     break
             except ValueError:
                 print('Invalid input')
-        
-        
-        query = '''
-            SELECT *
-            FROM opportunities
-            WHERE region_id = %s
-            AND shift_id = %s
-            AND day_id = %s
-            AND frequency_id = %s
-            AND type_id = %s
-            AND subtype_id = %s;
 
-        '''
-        cursor.execute(query, (region_id, shift_id, day_id, frequency_id, type_id, subtype_id))
-        conn.commit()
-        organizations = cursor.fetchall()
+        organizations = Link_Database().find_organizations(region_id, shift_id, day_id, frequency_id, type_id, subtype_id)
+
         if organizations:
             print("Organizations matching the criteria:")
             for org in organizations:
-                print(f"Organization name :{org[1]}")
+                print(f"Organization name: {org[1]}")
                 print(f"Organization email address: {org[2]}")
-                print(f"Opportunity Description {org[3]}")
+                print(f"Opportunity Description: {org[3]}")
         else:
             print("No organizations found matching the criteria.")
 
-    else:
-        print("Invalid choice. Please enter 1 or 2.")
 
 except psycopg2.Error as e:
     print("Error connecting to the database:", e)
-
-finally:
-    if conn:
-        conn.close()
