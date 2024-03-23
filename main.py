@@ -1,6 +1,8 @@
 import psycopg2
 import config
 
+import volunteer_search_engine  #my file
+
 class Link_Database:
     def __init__(self):
         self.conn = psycopg2.connect(
@@ -36,7 +38,7 @@ choice = input('Enter your choice: ')
 
 try:
     if choice == '1':
-        print('logic for finding volunteers here')
+        volunteer_search_engine.volunteer_finder() #my function for finding volunteers
     
     elif choice == '2':
         # organization_finder = Link_Database()
