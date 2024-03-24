@@ -118,7 +118,7 @@
 -- ('4 X Week'),
 -- ('5 X Week'),
 -- ('6 X Week'),
--- ('All days');
+-- ('More than two month');
 
 -- INSERT INTO type_opp (type_name)
 -- VALUES

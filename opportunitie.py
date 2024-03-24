@@ -104,19 +104,23 @@ class Opportunities:
                 """
             cursor.execute(query)
             all_rows = cursor.fetchall()
-            print('Here are the volonteers that are suitable for you:')
-            for row in all_rows:
-                row = [str(value) if value is not None else 'NULL' for value in row]
-                full_name, email, phone, city,day, shift, frequency, opp_type, opp_subtype = row
-                volunteer = f"""
-                    Volunteer personal information:
-                    Name: {full_name}, Email: {email}, Phone number: {phone}
-                    Volonteer preferences in work:
-                    City: {city}, Days and Shifts: {day} - {shift} - {frequency}
-                    Type of work: {opp_type}
-                        Subtype: {opp_subtype}
-                    """
-                print(volunteer)
+            if len(all_rows) > 0:
+                
+                print('Here are the volonteers that are suitable for you:')
+                for row in all_rows:
+                    row = [str(value) if value is not None else 'NULL' for value in row]
+                    full_name, email, phone, city,day, shift, frequency, opp_type, opp_subtype = row
+                    volunteer = f"""
+                        Volunteer personal information:
+                        Name: {full_name}, Email: {email}, Phone number: {phone}
+                        Volonteer preferences in work:
+                        City: {city}, Days and Shifts: {day} - {shift} - {frequency}
+                        Type of work: {opp_type}
+                            Subtype: {opp_subtype}
+                        """
+                    print(volunteer)
+            else:
+                print('No volunteers found matching the criteria.')
         
         except psycopg2.Error as e:
             print('\n\tError conecting\n', e)

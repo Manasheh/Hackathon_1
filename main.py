@@ -1,7 +1,7 @@
 import psycopg2
 import config
 
-import volunteer_search_engine  #my file
+import volunteer_search_engine  
 
 class Link_Database:
     def __init__(self):
@@ -31,14 +31,14 @@ class Link_Database:
 
     
 
-print('1 to find organisation')
+print('1 to find volunteer')
 print('2 to find organisation')
 
 choice = input('Enter your choice: ')
 
 try:
     if choice == '1':
-        volunteer_search_engine.volunteer_finder() #my function for finding volunteers
+        volunteer_search_engine.volunteer_finder()
     
     elif choice == '2':
         # organization_finder = Link_Database()
@@ -97,9 +97,9 @@ try:
             except ValueError:
                 print('Invalid Input')
         print('''
-                Number X in a Week
-              1) 1 time 2) 2 times 3) 3 times \n
-              4) 4 times 5) 5 times 6) 6 times 7) All days
+                Number X of a Week
+              1) 1 Week 2) 2 Week 3) 3 Week \n
+              4) 4 Week 5) 5 Week 6) 6 Week 7) More than two month
 
             ''')
         while True:
